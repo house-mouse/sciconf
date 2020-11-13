@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>About.html</title>
+  </head>
+  <body>
+    <br>
+    <h1>The need for yet another meta config language tool</h1>
+    <br>
+    I've used a ton of config languages in various tool and projects,
+    and have universally been dissatisfied by the results.<br>
+    <br>
+    <br>
+    I've tried TOML, which is mostly great, but resulted in ambiguities
+    with the [[ ]] notation and was hard to support.<br>
+    <br>
+    I've used YAML, but pretty much hated the strictness on spacing<br>
+    <br>
+    I've tried JSON, but was quite disappointed with the lack of
+    comments, and the rigidity around comma placement.<br>
+    <br>
+    I looked at SANE, but didn't like the adamant belief that block
+    quotes shouldn't be allowed (they're super useful for commenting out
+    a section of code/config and trying something else in a pinch)<br>
+    <br>
+    I looked ad SDLANG, but didn't like their forcing of numbers to
+    32/64 bit values.<br>
+    <br>
+    I looked at dhall.&nbsp; Lots of good stuff there.&nbsp; No
+    implementation in C or C++ yet, though, and I'm not sure I'm going
+    to be the one to cover all that it can do...<br>
+    <br>
+    So, those are the starting points for coming up with something of my
+    own.&nbsp; But... how do I come up with something of my own?<br>
+    <br>
+    <h1>Goals for a config parser tool</h1>
+    I would like a tool that allows me to specify in a 'simple' way the
+    format for input, and then I'd like that tool to help me as a
+    programmer validate user input, and help the user to create valid
+    input.<br>
+    <br>
+    I'd like the same meta-description that is used to parse the input
+    to be used to help the user.&nbsp; I'd like man-page style help
+    descriptions available for correcting config files and command line
+    arguments.&nbsp; I'd like the ability to add or create new grammars
+    at run time so that things like modules can specify their own syntax
+    and be added to the configuration system dynamically.<br>
+    <br>
+    Support UTF-8 and alternative character sets.<br>
+    <br>
+    Re-usability<br>
+    - Same description<br>
+    &nbsp;&nbsp;&nbsp; parses the config file<br>
+    &nbsp;&nbsp;&nbsp; validates the config file<br>
+    &nbsp;&nbsp;&nbsp; generates documentation for the format of the
+    config file<br>
+    &nbsp;&nbsp;&nbsp; provides user help for fixing/editing/creating
+    the config file<br>
+    <br>
+    - Same description language (and maybe even description)<br>
+    &nbsp;&nbsp;&nbsp; parses argv command line input<br>
+    &nbsp;&nbsp;&nbsp; provides documentation for the format of the argv
+    input<br>
+    &nbsp;&nbsp;&nbsp; generates documentation for the format of the
+    input file<br>
+    <br>
+    - Same description language (and maybe even description)<br>
+    &nbsp;&nbsp;&nbsp; parses cli input<br>
+    &nbsp;&nbsp;&nbsp; provides input completions<br>
+    &nbsp;&nbsp;&nbsp; provides realtime help by knowing the required
+    input format<br>
+    &nbsp;&nbsp;&nbsp; generates documentation for the cli<br>
+    <br>
+    Reformat an input in a "canonical" order and format<br>
+    Load a config file from one format and output to another format
+    (translate)<br>
+    <br>
+    I'd also like the back end to be agnostic from the front end.<br>
+    <br>
+    In other words, you should be able to load a 'TOML' description and
+    configure your program with a TOML config file, or load a JSON
+    config file and configure that same program with a JSON config
+    file.&nbsp; If you want your special version of JSON in your config
+    file to ... say ... SUPPORT COMMENTS -- like EVEN BLOCK COMMENTS ...
+    you should be able to adjust the JSON input file and do that.<br>
+    <h1>Why not an existing parser tool</h1>
+    <br>
+    Well, great question.&nbsp; 'cuz my first generation is surely not
+    going to be as great as what's been created over the years, since I
+    don't yet know how to deal with AST and other trees and different LR
+    parsing orders and whatnot.<br>
+    <br>
+    <a href="https://www.gnu.org/software/bison/">bison</a> and yacc<br>
+    lex and flex<br>
+    <a href="http://lrstar.org/">LRStar</a><br>
+    <br>
+    <br>
+    <br>
+    My goals are<br>
+    &nbsp;&nbsp;&nbsp; 1. Make it easy on the USER.&nbsp; Be gracious
+    and try to understand what they want.<br>
+    &nbsp;&nbsp;&nbsp; 2. Enable scientific configuration.&nbsp; Focus
+    on math, units, and ease of specifying things CORRECTLY<br>
+    &nbsp;&nbsp;&nbsp; 3. Figure out how to HELP the user.&nbsp; Make
+    validation and errors CLEAR and helpful.<br>
+    &nbsp;&nbsp;&nbsp; 4. Make it clean and easy to read (as much as can
+    be figured out, anyway)<br>
+    &nbsp;&nbsp;&nbsp; 5. Make it easy to comment out blocks to try new
+    things
+  </body>
+</html>
